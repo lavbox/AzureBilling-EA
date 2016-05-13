@@ -75,7 +75,20 @@
 			"metadata": {
 				"description": "Storage Account type"
 			}
-		}
+		},
+    "webjobFrequency": {
+      "type": "string",
+      "allowedValues": [
+        "15",
+        "30",
+        "45",
+        "60"
+      ],
+      "defaultValue": "15",
+      "metadata": {
+        "description": "Web job execution frequency in minutes."
+      }
+    }
 	},
 	"variables": {
 		"apiVersion": "2015-06-15",
@@ -175,7 +188,7 @@
 					"state": "enabled",
 					"recurrence": {
 						"frequency": "minute",
-						"interval": 15
+						"interval": "[parameters('webjobFrequency')]"
 					}
 				}
 			}]
