@@ -76,7 +76,7 @@ app.factory('chartService', function () {
                 tooltip: {
                     formatter: function () {
                         return '<b>' + this.series.name + '</b><br/>' +
-                            this.x + ': ' + this.y;
+                            this.x + ': <b>$' + parseFloat(this.y).toFixed(2)+'</b>';
                     }
                 },
                 
@@ -98,7 +98,9 @@ app.factory('chartService', function () {
                 text: chartData.title
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                formatter: function () {
+                    return '' + this.key + ': $ ' + parseFloat(this.y).toFixed(2);;
+                }
             },
             plotOptions: {
                 pie: {
@@ -106,7 +108,7 @@ app.factory('chartService', function () {
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        format: '<b>{point.name}</b>',
                         style: {
                             color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                         }
@@ -114,7 +116,7 @@ app.factory('chartService', function () {
                 }
             },
             series: [{
-                name: 'Brands',
+                name: '',
                 colorByPoint: true,
                 data: chartData.data
             }],
@@ -158,7 +160,7 @@ app.factory('chartService', function () {
             },
 
             series: [{
-                name: 'Brands',
+                name: 'Data',
                 colorByPoint: true,
                 data: chartData.data
             }],
@@ -166,81 +168,6 @@ app.factory('chartService', function () {
         });
     }
 
-    var _drawMapChart = function(name,chartData)
-    {
-        var mapGeoJSON = Highcharts.maps[''],
-                data = [],
-                parent,
-                match;
-        Highcharts.chart(name, {
-            chart: {
-                type: 'Map'
-            },
-
-            title: {
-                    text: null
-            },
-
-            mapNavigation: {
-                enabled: true
-            },
-
-            colorAxis: {
-                min: 0,
-                stops: [
-                    [0, '#EFEFFF'],
-                    [0.5, Highcharts.getOptions().colors[0]],
-                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).brighten(-0.5).get()]
-                ]
-            },
-
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                verticalAlign: 'bottom'
-            },
-
-            series: [{
-                data: data,
-                mapData: Highcharts.maps['custom/world'],
-                joinBy: ['hc-key', 'key'],
-                name: 'Random data',
-                states: {
-                    hover: {
-                        color: Highcharts.getOptions().colors[2]
-                    }
-                },
-                dataLabels: {
-                    enabled: showDataLabels,
-                    formatter: function () {
-                        return mapKey === 'custom/world' || mapKey === 'countries/us/us-all' ?
-                                (this.point.properties && this.point.properties['hc-a2']) :
-                                this.point.name;
-                    }
-                },
-                point: {
-                    events: {
-                        // On click, look for a detailed map
-                        click: function () {
-                            var key = this.key;
-                            $('#mapDropdown option').each(function () {
-                                if (this.value === 'countries/' + key.substr(0, 2) + '/' + key + '-all.js') {
-                                    $('#mapDropdown').val(this.value).change();
-                                }
-                            });
-                        }
-                    }
-                }
-            }, {
-                type: 'mapline',
-                name: "Separators",
-                data: Highcharts.geojson(mapGeoJSON, 'mapline'),
-                nullColor: 'gray',
-                showInLegend: false,
-                enableMouseTracking: false
-            }]
-        });
-    }
     return { drawLineChart: _drawlineChart ,
         drawHalfPieChart:_drawHalfPieChart,
         drawPieChart: _drawPieChart,

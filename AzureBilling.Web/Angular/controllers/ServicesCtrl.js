@@ -1,5 +1,5 @@
 ﻿var app = angular.module('app');
-app.controller('servicesCtrl', ['$scope', '$http', 'chartService', function ($scope, $http, chartService) {
+app.controller('servicesCtrl', ['$scope', '$http', 'chartService', '$routeParams', function ($scope, $http, chartService,$routeParams) {
 
     $scope._chartService = chartService;
 
@@ -14,10 +14,22 @@ app.controller('servicesCtrl', ['$scope', '$http', 'chartService', function ($sc
      //initialize the graph
     $scope.initGraph = function () {
 
+        $scope.monthId = $routeParams.monthId !== undefined ? $routeParams.monthId : ''
+
+        $http({
+            method: 'GET',
+            url: '/data/SpendingByServiceDaily?monthId=' + $scope.monthId
+        }).then(function successCallback(response) {
+            var data = {};
+            data.title = 'Daily Usage',
+            data.categories = response.data.date;
+            data.series = response.data.series;
+            $scope._chartService.drawLineChart('container2', data);
+        });
         //make server call to get data
         $http({
             method: 'GET',
-            url: '/data/SpendingByService'
+            url: '/data/SpendingByService?monthId=' + $scope.monthId
         }).then(function successCallback(response) {
             var data1 = {};
             data1.title = 'Usage by Category';

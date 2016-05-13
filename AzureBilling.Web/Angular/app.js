@@ -11,11 +11,11 @@ app.config(['$routeProvider',function ($routeProvider) {
         templateUrl: '/angular/templates/dashboard.html',
         controller: 'dashboardCtrl'
     });
-    $routeProvider.when('/byAccount', {
+    $routeProvider.when('/byAccount/:monthId?', {
         templateUrl: '/angular/templates/byAccount.html',
         controller: 'accountsCtrl'
     });
-    $routeProvider.when('/byService', {
+$routeProvider.when('/byService/:monthId?', {
         templateUrl: '/angular/templates/byServices.html',
         controller: 'servicesCtrl'
     });

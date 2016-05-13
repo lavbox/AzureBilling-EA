@@ -42,18 +42,16 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'chartService','$routeParams
 
         $scope.monthId = $routeParams.monthId !== undefined ? $routeParams.monthId :''
 
-        //$http({
-        //    method: 'GET',
-        //    url: '/data/Spending'
-        //}).then(function successCallback(response) {
-        //    var data = {};
-        //    data.title = 'Daily Usage',
-        //    data.categories = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-        //                '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
-        //                '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', ];
-        //    data.series =[{name:'',data: response.data.data}];
-        //    $scope._chartService.drawLineChart('container2', data);
-        //});
+        $http({
+            method: 'GET',
+            url: '/data/SpendingBySubscriptionDaily?monthId=' + $scope.monthId
+        }).then(function successCallback(response) {
+            var data = {};
+            data.title = 'Daily Usage',
+            data.categories = response.data.date;
+            data.series = response.data.series;
+            $scope._chartService.drawLineChart('container2', data);
+        });
 
         $http({
             method: 'GET',

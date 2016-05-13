@@ -100,7 +100,7 @@ namespace AzureBillingAPI.Web.Controllers
                                      Amount = fus.Sum(x => (string.IsNullOrEmpty(x.ExtendedCost) ? 0.00 : float.Parse(x.ExtendedCost))),
                                      PartitionKey = monthId,
                                      AccountName = fus.Key.AccountName,
-                                     RowKey = monthId + "_" + fus.Key.AccountName,
+                                     RowKey = fus.Key.Date.Replace("/", "-") + "_" + fus.Key.AccountName,
                                      RunId = runId,
                                      Day = fus.Key.Date
                                  };
@@ -152,7 +152,7 @@ namespace AzureBillingAPI.Web.Controllers
                                      PartitionKey = monthId,
                                      SubscriptionId = fus.Key.SubscriptionId,
                                      SubscriptionName = fus.Key.SubscriptionName,
-                                     RowKey = monthId + "_" + fus.Key.SubscriptionId,
+                                     RowKey = fus.Key.Date.Replace("/", "-") + "_" + fus.Key.SubscriptionId,
                                      RunId = runId,
                                      Day = fus.Key.Date
                                  };
@@ -204,7 +204,7 @@ namespace AzureBillingAPI.Web.Controllers
                                      Amount = fus.Sum(x => (string.IsNullOrEmpty(x.ExtendedCost) ? 0.00 : float.Parse(x.ExtendedCost))),
                                      PartitionKey = monthId,
                                      MeterCategory = fus.Key.MeterCategory,
-                                     RowKey = monthId + "_" + fus.Key.MeterCategory,
+                                     RowKey = fus.Key.Date.Replace("/","-") + "_" + fus.Key.MeterCategory,
                                      RunId = runId,
                                      Day = fus.Key.Date
                                  };
