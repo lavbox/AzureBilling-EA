@@ -74,7 +74,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AzureUsageDetails.cs" />
     <Compile Include="EAUsageAccountDailySummaryEntity.cs" />
     <Compile Include="EAUsageAccountSummaryEntity.cs" />
     <Compile Include="EAUsageMeterDailySummaryEntity.cs" />
@@ -85,7 +84,6 @@
     <Compile Include="EntityRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EAUsageDetailEntity.cs" />
-    <Compile Include="UsageDetailsTemp.cs" />
     <Compile Include="UserSubscription.cs" />
     <Compile Include="UserTokenCache.cs" />
   </ItemGroup>
