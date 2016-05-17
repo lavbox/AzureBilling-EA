@@ -188,7 +188,7 @@
 					"state": "enabled",
 					"recurrence": {
 						"frequency": "hour",
-						"interval": "[parameters('webjobFrequency')]"
+						"interval": "[parameters('webjobFrequencyInHours')]"
 					}
 				}
 			}]
