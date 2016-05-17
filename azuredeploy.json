@@ -154,9 +154,9 @@
 					"name": "free"
 				},
 				"quota": {
-					"maxJobCount": "10",
+					"maxJobCount": "5",
 					"maxRecurrence": {
-						"Frequency": "minute",
+						"Frequency": "hour",
 						"interval": "1"
 					}
 				}
