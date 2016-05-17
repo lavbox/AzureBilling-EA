@@ -76,15 +76,15 @@
 				"description": "Storage Account type"
 			}
 		},
-    "webjobFrequencyInHours": {
+    "webjobFrequencyInMinutes": {
       "type": "string",
       "allowedValues": [
-        "1",
-        "2",
-        "3",
-        "4"
+        "15",
+        "30",
+        "45",
+        "60"
       ],
-      "defaultValue": "1",
+      "defaultValue": "15",
       "metadata": {
         "description": "Web job execution frequency in hours."
       }
@@ -151,12 +151,12 @@
 			"location": "[parameters('siteLocation')]",
 			"properties": {
 				"sku": {
-					"name": "free"
+					"name": "standard"
 				},
 				"quota": {
-					"maxJobCount": "5",
+					"maxJobCount": "10",
 					"maxRecurrence": {
-						"Frequency": "hour",
+						"Frequency": "minute",
 						"interval": "1"
 					}
 				}
@@ -187,8 +187,8 @@
 					},
 					"state": "enabled",
 					"recurrence": {
-						"frequency": "hour",
-						"interval": "[parameters('webjobFrequencyInHours')]"
+						"frequency": "minute",
+						"interval": "[parameters('webjobFrequencyInMinutes')]"
 					}
 				}
 			}]
